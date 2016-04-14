@@ -1,0 +1,10 @@
+
+# Framework specific
+vendor/
+composer.lock
+app/Config.php
+
+.zip
+
+# The developers Playground
+works

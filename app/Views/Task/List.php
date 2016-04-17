@@ -143,8 +143,8 @@ use Helpers\Date;
             <?php if(count($tasks) > 0) : ?>
                 <?php foreach($tasks as $task) : ?>
                     <tr>
-                        <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>">#<?php echo $task->id; ?></a></td>
-                        <td><?php echo $task->task; ?></td>
+                        <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Detalhes da Tarefa">#<?php echo $task->id; ?></a></td>
+                        <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Detalhes da Tarefa"><?php echo $task->task; ?></a></td>
                         <td class="text-center"><i class="<?php echo TaskConfig::getIconKind($task->kind); ?>"></i></td>
                         <td class="text-center"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></td>
                         <td><?php echo $task->project_name; ?></td>

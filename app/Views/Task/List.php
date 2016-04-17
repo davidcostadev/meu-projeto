@@ -5,67 +5,15 @@ use Helpers\Date;
 
 ?>
 <div class="panel panel-default">
-    <?php /*<div class="panel-heading">
-        <div class="row">
-            <div class="col-md-12 col-lg-10 col-lg-offset-1">
-                <form action="<?php echo DIR; ?>musicas/lista" method="get">
-                    <div class="row">
-                        <div class="col-xs-8 col-sm-9">
-                            <input type="text" name="q" class="form-control input-lg" placeholder="Digite o nome da música">    
-                        </div>
-                        <div class="col-xs-4 col-sm-3">
-                            <button type="submit" class="btn btn-success btn-lg btn-block"><i class="fa fa-search"></i> Pesquisar</button>    
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>*/?>
-
 
     <div class="panel-body">
-        <div class="form-inline">
-            <div class="form-group form-group-sm" style="margin: 0;">
-                <label for="" class="control-label" style="font-size: 12px;margin: 0">lista</label><br>
-                <div class="input-group">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-table"></i> Tabela
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li class="active"><a href="#"><i class="fa fa-table"></i> Tabela</a></li>
-                            <li><a href="#"><i class="fa fa-list-ul"></i> Lista</a></li>
-                            
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        
-            <div class="form-group form-group-sm" style="margin: 0;">
-                <label for="" class="control-label" style="font-size: 12px;margin: 0">Disponibilidade</label><br>
-                <div class="input-group">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                            Todos
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li class="active"><a href="#"> Todos</a></li>
-                            <li><a href="#"> Ok</a></li>
-                            <li><a href="#"> Indisponível</a></li>
-                            <li><a href="#"> 7 Dias</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-            
-        
-        
-       
+        <a href="<?php echo DIR; ?>tasks" class="btn btn-default"><i class="fa fa-eye"></i> Tudo</a>
+        <a href="<?php echo DIR; ?>tasks?status=new" class="btn btn-link"><i class="fa fa-eye"></i> Novos</a>
+        <a href="<?php echo DIR; ?>tasks?status=open" class="btn btn-link"><i class="fa fa-eye"></i> Abertos</a>
+        <a href="<?php echo DIR; ?>tasks?priority=high" class="btn btn-link"><i class="fa fa-eye"></i> Urgentes</a>
     </div>
-     <table class="table table-hover table-striped table-list">
+
+    <table class="table table-hover table-striped table-list">
         <thead>
             <tr>
                 <th style="width: 100px;">#ID <a href="#"><i class="fa fa-caret-down"></i></a> <a href="#"><i class="fa fa-caret-up"></i></a></th>
@@ -132,7 +80,7 @@ use Helpers\Date;
                     <div class="form-group">
                         <input type="text" nome="id_produto_competidor" value="<?php if(isset($filtros['id_produto_competidor'])) echo $filtros['id_produto_competidor']; ?>" class="form-control input-xs">
                     </div>
-                </td>>
+                </td>
 
                 <td class="text-right">
                     <button class="btn btn-warning btn-sm"><i class="fa fa-search"></i> Buscar</button>
@@ -145,10 +93,10 @@ use Helpers\Date;
                     <tr>
                         <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Detalhes da Tarefa">#<?php echo $task->id; ?></a></td>
                         <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Detalhes da Tarefa"><?php echo $task->task; ?></a></td>
-                        <td class="text-center"><i class="<?php echo TaskConfig::getIconKind($task->kind); ?>"></i></td>
-                        <td class="text-center"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></td>
-                        <td><?php echo $task->project_name; ?></td>
-                        <td><?php echo $task->status; ?></td>
+                        <td class="text-center"><a href="<?php echo DIR; ?>tasks?kind=<?php echo $task->kind; ?>" title="Filtrar Por Tipo"><i class="<?php echo TaskConfig::getIconKind($task->kind); ?>"></i></a></td>
+                        <td class="text-center"><a href="<?php echo DIR; ?>tasks?priority=<?php echo $task->priority; ?>" title="Filtrar Por Prioridade"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></a></td>
+                        <td><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $task->project_id; ?>" title="Filtrar Por Projeto"><?php echo $task->project_name; ?></a></td>
+                        <td><a href="<?php echo DIR; ?>tasks?status=<?php echo $task->status; ?>" title="Filtrar Por Status"><?php echo $task->status; ?></a></td>
                         <td class="text-right"><?php echo Date::getTempo($task->update_on); ?></td>
 
                         <td class="text-right">

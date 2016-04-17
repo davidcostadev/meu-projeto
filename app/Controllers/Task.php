@@ -43,10 +43,32 @@ class Task extends Controller
         $data['title']          = 'Lista de Tarefas';
         $data['return_url']    = 'tasks';
 
-        $this->taskTable->setFiltros([
+        $project_id = filter_input(INPUT_GET, 'project_id', FILTER_VALIDATE_INT);
+        $kind       = filter_input(INPUT_GET, 'kind');
+        $priority   = filter_input(INPUT_GET, 'priority');
+        $status     = filter_input(INPUT_GET, 'status');
+
+
+        $filtros = array();
+
+        if($project_id > 0) {
+            $filtros[] = 't.project_id = '.$project_id;
+        }
+        if(!empty($kind)) {
+            $filtros[] = 't.kind = '.$this->taskTable->escape($kind);
+        }
+        if(!empty($priority)) {
+            $filtros[] = 't.priority = '.$this->taskTable->escape($priority);
+        }
+        if(!empty($status)) {
+            $filtros[] = 't.status = '.$this->taskTable->escape($status);
+        }
+
+
+        $this->taskTable->setFiltros($filtros
             //'t.project_id =  1',
             //'(t.status = \'resolved\' OR t.status = \'closed\')',
-        ]);
+        );
         $this->taskTable->setOrderBy([
             't.status',
             't.priority' => 'ASC',

@@ -26,6 +26,11 @@ abstract class Table extends Model {
         parent::__construct();
     }
 
+
+    public function escape($string) {
+        return $this->db->quote($string);
+    }
+
     public function setLimit($limit) {
         $this->limit = $limit;
     }

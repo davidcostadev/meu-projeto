@@ -152,7 +152,7 @@ class Form
         $o .= (isset($params['disabled']))  ? " disabled='{$params['disabled']}'"               : '';
         $o .= (isset($params['style']))     ? " style='{$params['style']}'"                     : '';
         $o .= ">\n";
-        $o .= "<option value=''>Select</option>\n";
+        $o .= "<option value=''>----Selecione----</option>\n";
         if (isset($params['data']) && is_array($params['data'])) {
             foreach ($params['data'] as $k => $v) {
                 if (isset($params['value']) && $params['value'] == $k) {

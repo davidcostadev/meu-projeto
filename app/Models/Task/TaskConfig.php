@@ -15,15 +15,23 @@ class TaskConfig extends Model
 
         $data = array();
 
+        if(isset($params['task']) && !empty($params['task'])) {
+            $data['task']        = $params['task'];
+        }
+        if(isset($params['description']) && !empty($params['description'])) {
+            $data['description'] = $params['description'];
+        }
         if(isset($params['status']) && !empty($params['status'])) {
-            $data['status']   = $params['status'];
+            $data['status']      = $params['status'];
         }
         if(isset($params['priority']) && !empty($params['priority'])) {
-            $data['priority'] = $params['priority'];
+            $data['priority']    = $params['priority'];
         }
         if(isset($params['kind']) && !empty($params['kind'])) {
-            $data['kind']     = $params['kind'];
+            $data['kind']        = $params['kind'];
         }
+
+        $data['update_on']  = date('Y-m-d G:i:s');
 
 
 

@@ -87,6 +87,25 @@ class Task extends Controller
         View::renderTemplate('footer', $data);
     }
 
+    public function edit($params) {
+
+        $data['task'] = $this->taskConfig->getTask($params);
+
+        if(!$data['task']) {
+             Url::redirect('');
+        }
+
+
+        $data['title']          = 'Editar da Tarefa: #'.$data['task']->id;
+        $data['welcomeMessage'] = $this->language->get('subpageMessage');
+        $data['return_url']    = 'task/edit/'.$data['task']->id;
+
+
+        View::renderTemplate('header', $data);
+        View::render('Task/Edit', $data);
+        View::renderTemplate('footer', $data);
+    }
+
     public function add() {
 
         $data['project_id']  = filter_input(INPUT_POST, 'project_id');
@@ -109,7 +128,7 @@ class Task extends Controller
         }
     }
 
-    public function edit() {
+    public function save() {
 
         if(strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
             $method = INPUT_POST;
@@ -118,12 +137,15 @@ class Task extends Controller
         }
 
 
-        $data['task_id']     = filter_input($method, 'task_id');
+        $data['task_id']     = filter_input($method, 'task_id', FILTER_VALIDATE_INT);
+        $data['task']        = filter_input($method, 'task');
+        $data['description'] = filter_input($method, 'description');
         $data['status']      = filter_input($method, 'status');
         $data['priority']    = filter_input($method, 'priority');
         $data['kind']        = filter_input($method, 'kind');
         $url                 = filter_input(INPUT_GET, 'return');
 
+   
 
 
         $result   = $this->taskConfig->updateTask($data);

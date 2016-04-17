@@ -19,11 +19,11 @@ use App\Models\Task\TaskConfig;
  */
 class Welcome extends Controller
 {
+
     /**
      * Call the parent construct
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
         $this->language->load('Welcome');
 
@@ -34,8 +34,7 @@ class Welcome extends Controller
     /**
      * Define Index page title and load template files
      */
-    public function index()
-    {
+    public function index() {
         $data['title'] = 'Dashboard';
         $data['welcomeMessage'] = $this->language->get('welcomeMessage');
         $data['projects'] = 'Dashboard';
@@ -57,8 +56,7 @@ class Welcome extends Controller
     /**
      * Define Subpage page title and load template files
      */
-    public function subPage()
-    {
+    public function subPage() {
         $data['title'] = $this->language->get('subpageText');
         $data['welcomeMessage'] = $this->language->get('subpageMessage');
 

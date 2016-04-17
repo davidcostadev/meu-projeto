@@ -15,21 +15,18 @@ class Demo extends Controller
     /**
      * Call the parent construct
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
     }
 
     /**
      * Define Index method
      */
-    public function index()
-    {
+    public function index() {
         echo 'hello';
     }
 
-    public function test($param1 = '', $param2 = '', $param3 = '', $param4 = '')
-    {
+    public function test($param1 = '', $param2 = '', $param3 = '', $param4 = '') {
         $params = array(
             'param1' => $param1,
             'param2' => $param2,

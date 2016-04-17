@@ -20,11 +20,11 @@ class Task extends Controller
 {
     
     private $userConfig;
+
     /**
      * Call the parent construct
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
         if(empty(Session::get('user_id'))) {
@@ -40,11 +40,8 @@ class Task extends Controller
      */
     public function index() {
 
-
-
         $data['title']          = 'Lista de Tarefas';
         $data['return_url']    = 'tasks';
-
 
         $this->taskTable->setFiltros([
             //'t.project_id =  1',
@@ -66,8 +63,7 @@ class Task extends Controller
         View::renderTemplate('footer', $data);
     }
 
-    public function details($params)
-    {
+    public function details($params) {
         //die($params);
 
         $data['task'] = $this->taskConfig->getTask($params);

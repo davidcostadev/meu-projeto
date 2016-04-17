@@ -19,11 +19,11 @@ class User extends Controller
 {
     
     private $userConfig;
+
     /**
      * Call the parent construct
      */
-    public function __construct()
-    {
+    public function __construct() {
         parent::__construct();
 
         $this->userConfig = new \App\Models\User\UserConfig();
@@ -32,8 +32,7 @@ class User extends Controller
     /**
      * Define Index page title and load template files
      */
-    public function index()
-    {
+    public function index() {
         $data['title'] = 'Dashboard';
         $data['welcomeMessage'] = $this->language->get('welcomeMessage');
 
@@ -45,8 +44,7 @@ class User extends Controller
     /**
      * Define Subpage page title and load template files
      */
-    public function login()
-    {
+    public function login() {
         $data['title'] = 'Login';
 
         View::renderTemplate('login_header', $data);

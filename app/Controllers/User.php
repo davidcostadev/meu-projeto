@@ -11,6 +11,7 @@ namespace App\Controllers;
 use Core\View;
 use Core\Controller;
 use Helpers\Url;
+use Helpers\Input as input;
 
 /**
  * Sample controller showing a construct and 2 methods and their typical usage.
@@ -54,13 +55,13 @@ class User extends Controller
 
     public function logar() {
 
-        $email    = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-        $password = filter_input(INPUT_POST, 'password');
+        $email    = input::post('email', '', FILTER_SANITIZE_EMAIL);
+        $password = input::post('password');
 
-        $result   = $this->userConfig->logar(array(
+        $result   = $this->userConfig->logar([
             'email'    => $email,
             'password' => $password
-        ));
+        ]);
 
 
         if($result > 0) {

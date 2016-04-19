@@ -11,8 +11,49 @@ class ProjectConfig extends Model
         parent::__construct();
     }  
 
-    public function getProjects() {
+    public function updateProject($params) {
 
+        $data = array();
+
+        if(isset($params['own_id']) && !empty($params['own_id'])) {
+            $data['own_id']      = $params['own_id'];
+        }
+        if(isset($params['project']) && !empty($params['project'])) {
+            $data['project']     = $params['project'];
+        }
+        if(isset($params['description']) && !empty($params['description'])) {
+            $data['description'] = $params['description'];
+        }
+
+
+        $data['update_on']  = date('Y-m-d G:i:s');
+
+
+        $where = array('project_id' => $params['project_id']);
+
+        $this->db->update('tbl_project',$data, $where);
+    }
+
+    public function addProject($params) {
+
+        if(empty($data)) {
+            $data = date('Y-m-d G:i:s');
+        }
+
+        $data_task = array(
+            'own_id'      => $params['own_id'],
+            'project'     => $params['project'],
+            'description' => $params['description'],
+            'create_on'   => $data,
+            'update_on'   => $data,
+        );
+
+        $result = $this->db->insert('tbl_project', $data_task);
+
+        return true;
+    }
+
+    public function getProjects() {
 
         $sql = "SELECT 
         p.id as project_id,
@@ -24,6 +65,7 @@ class ProjectConfig extends Model
         FROM tbl_project AS p
         INNER JOIN tbl_user AS u ON p.own_id = u.id
         ";
+
 
         $result = $this->db->select($sql);
         //$result = $this->db->select($sql, array(':email' => $params['email']));

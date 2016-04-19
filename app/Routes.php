@@ -26,6 +26,9 @@ Router::any('task/edit/(:num)', 'App\Controllers\Task@edit');
 Router::any('task/details/(:num)', 'App\Controllers\Task@details');
 Router::any('tasks', 'App\Controllers\Task@index');
 
+Router::any('project/add', 'App\Controllers\Project@add');
+Router::any('project/save', 'App\Controllers\Project@save');
+
 Router::any('subpage', 'App\Controllers\Welcome@subPage');
 Router::any('admin/(:any)(/(:any)(/(:any)(/(:any))))', 'App\Controllers\Demo@test');
 /** End default routes */

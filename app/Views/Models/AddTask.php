@@ -5,7 +5,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Adicionar Tarefa</h4>
             </div>
-            <form action="<?php echo DIR; ?>task/add?return=<?php echo urlencode($return_url); ?>" class="form-horizontal" method="post">
+            <form action="<?php echo DIR; ?>task/save?return=<?php echo urlencode($return_url); ?>" class="form-horizontal" method="post">
                 <input type="hidden" name="project_id" id="ah-project-id">
                 <div class="modal-body">
                     <div class="form-group">

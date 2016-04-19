@@ -20,8 +20,8 @@ use Helpers\Session;
 
 Router::post('user/logar', 'App\Controllers\User@logar');
 
-Router::post('task/add', 'App\Controllers\Task@add');
-Router::any('task/save/', 'App\Controllers\Task@save');
+Router::any('task/add', 'App\Controllers\Task@add');
+Router::post('task/save', 'App\Controllers\Task@save');
 Router::any('task/edit/(:num)', 'App\Controllers\Task@edit');
 Router::any('task/details/(:num)', 'App\Controllers\Task@details');
 Router::any('tasks', 'App\Controllers\Task@index');

@@ -12,6 +12,7 @@ use Core\View;
 use Core\Controller;
 use Helpers\Url;
 use Helpers\Session;
+use Helpers\Input as input;
 
 /**
  * Sample controller showing a construct and 2 methods and their typical usage.
@@ -126,49 +127,45 @@ class Task extends Controller
 
     public function add() {
 
-        $data['project_id']  = filter_input(INPUT_POST, 'project_id');
-        $data['task']        = filter_input(INPUT_POST, 'task');
-        $data['description'] = filter_input(INPUT_POST, 'description');
-        $data['status']      = filter_input(INPUT_POST, 'status');
-        $data['priority']    = filter_input(INPUT_POST, 'priority');
-        $data['kind']        = filter_input(INPUT_POST, 'kind');
-        $url                 = filter_input(INPUT_GET, 'return');
+
+        $data['title']          = 'Adicionar Tarefa';
+        $data['welcomeMessage'] = $this->language->get('subpageMessage');
+        $data['return_url']     = 'task/add';
+
+        $projectObject = $this->projectConfig->getProjects();
 
 
+        $data['projects'] = array();
 
-        $result   = $this->taskConfig->add($data);
-
-
-        if(!empty($url)) {
-            Url::redirect($url);
-        } else {
-            Url::redirect('');
+        if(count($projectObject) > 0) {
+            foreach ($projectObject as $project) {
+                $data['projects'][$project->project_id] = $project->project . " / " . $project->user_name;
+            }
         }
+
+        View::renderTemplate('header', $data);
+        View::render('Task/Add', $data);
+        View::renderTemplate('footer', $data);
     }
 
     public function save() {
 
-        if(strtolower($_SERVER['REQUEST_METHOD']) == 'post') {
-            $method = INPUT_POST;
+        $data['task_id']     = input::get('task_id', 0, FILTER_SANITIZE_NUMBER_INT);
+        $data['project_id']  = input::get('project_id', 0, FILTER_SANITIZE_NUMBER_INT);
+        $data['task']        = input::get('task');
+        $data['description'] = input::get('description');
+        $data['status']      = input::get('status');
+        $data['priority']    = input::get('priority');
+        $data['kind']        = input::get('kind');
+        $url                 = input::get('return', null, FILTER_SANITIZE_URL);
+
+
+        if($data['task_id'] > 0) {
+            $result   = $this->taskConfig->updateTask($data);    
         } else {
-            $method = INPUT_GET;
+            $result   = $this->taskConfig->addTask($data);    
         }
-
-
-        $data['task_id']     = filter_input($method, 'task_id', FILTER_VALIDATE_INT);
-        $data['task']        = filter_input($method, 'task');
-        $data['description'] = filter_input($method, 'description');
-        $data['status']      = filter_input($method, 'status');
-        $data['priority']    = filter_input($method, 'priority');
-        $data['kind']        = filter_input($method, 'kind');
-        $url                 = filter_input(INPUT_GET, 'return');
-
    
-
-
-        $result   = $this->taskConfig->updateTask($data);
-
-
         if(!empty($url)) {
             Url::redirect($url);
         } else {

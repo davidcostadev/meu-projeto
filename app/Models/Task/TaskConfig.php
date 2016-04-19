@@ -38,7 +38,30 @@ class TaskConfig extends Model
         $where = array('id' => $params['task_id']);
 
         $this->db->update('tbl_task',$data, $where);
+    }
 
+    public function addTask($params) {
+
+        if(empty($data)) {
+            $data = date('Y-m-d G:i:s');
+        }
+
+
+        $data_task = array(
+            'own_id'      => USUARIO_ID,
+            'project_id'  => $params['project_id'],
+            'task'        => $params['task'],
+            'description' => $params['description'],
+            'status'      => $params['status'],
+            'priority'    => $params['priority'],
+            'kind'        => $params['kind'],
+            'create_on'   => $data,
+            'update_on'   => $data,
+        );
+
+        $result = $this->db->insert('tbl_task', $data_task);
+
+        return true;
     }
 
     public function getTask($task_id) {
@@ -335,30 +358,6 @@ class TaskConfig extends Model
         }
 
         return $return;
-    }
-
-    public function add($params) {
-
-        if(empty($data)) {
-            $data = date('Y-m-d G:i:s');
-        }
-
-
-        $data_task = array(
-            'own_id'      => USUARIO_ID,
-            'project_id'  => $params['project_id'],
-            'task'        => $params['task'],
-            'description' => $params['description'],
-            'status'      => $params['status'],
-            'priority'    => $params['priority'],
-            'kind'        => $params['kind'],
-            'create_on'   => $data,
-            'update_on'   => $data,
-        );
-
-        $result = $this->db->insert('tbl_task', $data_task);
-
-        return true;
     }
 
 }

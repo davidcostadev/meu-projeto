@@ -32,8 +32,9 @@ class Task extends Controller
             Url::redirect('');
         }
 
-        $this->taskConfig = new \App\Models\Task\TaskConfig();
-        $this->taskTable  = new \App\Models\Task\TaskTable();
+        $this->projectConfig = new \App\Models\Project\ProjectConfig();
+        $this->taskConfig    = new \App\Models\Task\TaskConfig();
+        $this->taskTable     = new \App\Models\Task\TaskTable();
     }
 
     /**
@@ -41,35 +42,34 @@ class Task extends Controller
      */
     public function index() {
 
-        $data['title']          = 'Lista de Tarefas';
+        $data['title']         = 'Lista de Tarefas';
         $data['return_url']    = 'tasks';
 
-        $project_id = filter_input(INPUT_GET, 'project_id', FILTER_VALIDATE_INT);
-        $kind       = filter_input(INPUT_GET, 'kind');
-        $priority   = filter_input(INPUT_GET, 'priority');
-        $status     = filter_input(INPUT_GET, 'status');
+        // Filtros
+
+        $data['filtro']['project_id'] = input::get('project_id', 0, FILTER_SANITIZE_NUMBER_INT);
+        $data['filtro']['kind']       = input::get('kind');
+        $data['filtro']['priority']   = input::get('priority');
+        $data['filtro']['status']     = input::get('status');
 
 
         $filtros = array();
 
-        if($project_id > 0) {
-            $filtros[] = 't.project_id = '.$project_id;
+        if($data['filtro']['project_id'] > 0) {
+            $filtros[] = 't.project_id = '.$data['filtro']['project_id'];
         }
-        if(!empty($kind)) {
-            $filtros[] = 't.kind = '.$this->taskTable->escape($kind);
+        if(!empty($data['filtro']['kind'])) {
+            $filtros[] = 't.kind = '.$this->taskTable->escape($data['filtro']['kind']);
         }
-        if(!empty($priority)) {
-            $filtros[] = 't.priority = '.$this->taskTable->escape($priority);
+        if(!empty($data['filtro']['priority'])) {
+            $filtros[] = 't.priority = '.$this->taskTable->escape($data['filtro']['priority']);
         }
-        if(!empty($status)) {
-            $filtros[] = 't.status = '.$this->taskTable->escape($status);
+        if(!empty($data['filtro']['status'])) {
+            $filtros[] = 't.status = '.$this->taskTable->escape($data['filtro']['status']);
         }
 
 
-        $this->taskTable->setFiltros($filtros
-            //'t.project_id =  1',
-            //'(t.status = \'resolved\' OR t.status = \'closed\')',
-        );
+        $this->taskTable->setFiltros($filtros);
         $this->taskTable->setOrderBy([
             't.status',
             't.priority' => 'ASC',
@@ -78,8 +78,20 @@ class Task extends Controller
         $data['tasks'] = $this->taskTable->getList();
 
 
-        // print_r($data['tasks']);
-        // die();
+        // Lista de Projetos
+
+        $projectObject = $this->projectConfig->getProjects();
+
+
+        $data['projects'] = array();
+
+        if(count($projectObject) > 0) {
+            foreach ($projectObject as $project) {
+                $data['projects'][$project->project_id] = $project->project . " / " . $project->user_name;
+            }
+        }
+
+        // View
 
         View::renderTemplate('header', $data);
         View::render('Task/List', $data);

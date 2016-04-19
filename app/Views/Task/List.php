@@ -37,41 +37,47 @@ use Helpers\Date;
                     
                 </td>
                 <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    <div class="btn-group btn-block">
+                        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
+                        <ul class="dropdown-menu" role="menu">
                             <li><a href="#"><i class="fa fa-trash-o"></i> Bug</a></li>
                         </ul>
                     </div>
                 </td>
                 <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    <div class="btn-group btn-block">
+                        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
+                        <ul class="dropdown-menu" role="menu">
                             <li><a href="#"><i class="fa fa-trash-o"></i> Bug</a></li>
                         </ul>
                     </div>
                 </td>
                 <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    <div class="btn-group btn-block">
+                        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
+                            <?php if(isset($projects[$filtro['project_id']])) echo $projects[$filtro['project_id']]; ?>
                         </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#"><i class="fa fa-trash-o"></i> Bug</a></li>
+                        <ul class="dropdown-menu" role="menu">
+                            <?php if(count($projects)) : ?>
+                                <li><a href="<?php echo DIR; ?>tasks" title="Ver Todos">Todos</a></li>
+                                <?php foreach($projects as $project_id => $project) : ?>
+                                    <li<?php if($filtro['project_id'] === $project_id) echo ' class="active"'; ?>><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project_id; ?>" title="Filtrar por Projeto"><?php echo $project; ?></a></li>
+                                <?php endforeach;?>
+                            <?php endif; ?>
                         </ul>
                     </div>
                 </td>
                 <td>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                    <div class="btn-group btn-block">
+                        <button type="button" class="btn btn-default btn-block dropdown-toggle" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu pull-right" role="menu">
+                        <ul class="dropdown-menu" role="menu">
                             <li><a href="#"><i class="fa fa-trash-o"></i> Bug</a></li>
                         </ul>
                     </div>
@@ -117,7 +123,7 @@ use Helpers\Date;
             <?php endif; ?>
         </tbody>
     </table>
-
+    
     <div class="panel-footer text-center">
         <?php echo $paginacao; ?>
         <hr>

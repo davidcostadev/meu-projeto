@@ -37,9 +37,6 @@ class Welcome extends Controller
     public function index() {
         $data['title'] = 'Dashboard';
         $data['welcomeMessage'] = $this->language->get('welcomeMessage');
-        $data['projects'] = 'Dashboard';
-
-
 
         $data['projects']   = $this->projectConfig->getProjects();
         $data['taskConfig'] = $this->taskConfig;

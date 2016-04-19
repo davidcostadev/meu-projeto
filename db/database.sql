@@ -16,7 +16,7 @@ CREATE TABLE `tbl_project` (
   `own_id` int(11) NOT NULL,
   `project` varchar(150) NOT NULL,
   `description` text NOT NULL,
-  `created_on` datetime NOT NULL,
+  `create_on` datetime NOT NULL,
   `update_on` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -24,7 +24,7 @@ CREATE TABLE `tbl_project` (
 -- Extraindo dados da tabela `tbl_project`
 --
 
-INSERT INTO `tbl_project` (`id`, `own_id`, `project`, `description`, `created_on`, `update_on`) VALUES
+INSERT INTO `tbl_project` (`id`, `own_id`, `project`, `description`, `create_on`, `update_on`) VALUES
 (1, 2, 'Primeiro projeto', '', '2016-04-11 20:00:00', '2016-04-11 20:00:00'),
 
 

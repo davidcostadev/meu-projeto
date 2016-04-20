@@ -6,7 +6,7 @@ use Helpers\Form;
 
  
 echo Form::open([
-    'action' => DIR . 'task/save/?return='.urlencode($return_url),
+    'action' => DIR . 'task/save?return='.urlencode($return_url),
     'method' => 'post',
     'id'     => 'form-edit-task',
     'class'  => 'form-horizontal'

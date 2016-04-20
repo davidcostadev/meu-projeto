@@ -21,13 +21,13 @@ use Helpers\Date;
                             Status <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu">
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=new&amp;return=<?php echo urlencode($return_url); ?>">Novo</a></li>
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=open&amp;return=<?php echo urlencode($return_url); ?>">Aberto</a></li>
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=onhold&amp;return=<?php echo urlencode($return_url); ?>">Em Espera</a></li>
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=resolved&amp;return=<?php echo urlencode($return_url); ?>">Resolvido</a></li>
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=invalid&amp;return=<?php echo urlencode($return_url); ?>">Inválido</a></li>
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=wontfix&amp;return=<?php echo urlencode($return_url); ?>">Não Resolvido</a></li>
-                            <li><a href="<?php echo DIR; ?>task/save/?task_id=<?php echo $task->task_id; ?>&amp;status=closed&amp;return=<?php echo urlencode($return_url); ?>">Fechado</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=new&amp;return=<?php echo urlencode($return_url); ?>">Novo</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=open&amp;return=<?php echo urlencode($return_url); ?>">Aberto</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=onhold&amp;return=<?php echo urlencode($return_url); ?>">Em Espera</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=resolved&amp;return=<?php echo urlencode($return_url); ?>">Resolvido</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=invalid&amp;return=<?php echo urlencode($return_url); ?>">Inválido</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=wontfix&amp;return=<?php echo urlencode($return_url); ?>">Não Resolvido</a></li>
+                            <li><a href="<?php echo DIR; ?>task/save?task_id=<?php echo $task->task_id; ?>&amp;status=closed&amp;return=<?php echo urlencode($return_url); ?>">Fechado</a></li>
                         </ul>
                     </div>
                 </div>

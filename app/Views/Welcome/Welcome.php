@@ -21,18 +21,19 @@ use Helpers\Date;
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <i class="fa fa-area-chart fa-fw"></i> <?php echo $project->user_name. ' / '.$project->project; ?>
+                <i class="fa fa-area-chart fa-fw"></i> <a href="<?php echo DIR; ?>tasks?client_id=<?php echo $project->own_id; ?>"><?php echo $project->user_name;?></a> / <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>"><?php echo $project->project; ?></a>
                 <div class="pull-right"><button class="btn btn-xs btn-default" id="addTask" data-toggle="modal" data-target="#modalAddTask" data-project-id="<?php echo $project->project_id; ?>"><i class="fa fa-plus"></i> Tarefa</button></div>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 
-                <p><small><a href="#"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id)); ?> Tarefas</a>
-                (<a href="#"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'resolved'); ?> Resolvidos</a> -
-                <a href="#"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'open'); ?> Abertas</a> -
-                <a href="#"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'closed'); ?> Fechadas</a> -
-                <a href="#"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'onhold'); ?> Em espera</a> -
-                <a href="#"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'wontfix'); ?> Não resolvidas</a>
+                <p><small><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id)); ?> Tarefas</a>
+                (<a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=new'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'new'); ?> Novos</a> -
+                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=resolved'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'resolved'); ?> Resolvidos</a> -
+                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=open'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'open'); ?> Abertas</a> -
+                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=closed'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'closed'); ?> Fechadas</a> -
+                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=onhold'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'onhold'); ?> Em espera</a> -
+                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=wontfix'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'wontfix'); ?> Não resolvidas</a>
                 )</small></p>
     
                 <?php
@@ -223,7 +224,7 @@ use Helpers\Date;
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo DIR; ?>tasks?status=new">
                 <div class="panel-footer">
                     <span class="pull-left">Ver</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -243,7 +244,7 @@ use Helpers\Date;
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo DIR; ?>tasks?status=open">
                 <div class="panel-footer">
                     <span class="pull-left">Ver</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -263,7 +264,7 @@ use Helpers\Date;
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo DIR; ?>tasks?status=onhold">
                 <div class="panel-footer">
                     <span class="pull-left">Ver</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -283,7 +284,7 @@ use Helpers\Date;
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo DIR; ?>tasks?status=resolved">
                 <div class="panel-footer">
                     <span class="pull-left">Ver</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -303,7 +304,7 @@ use Helpers\Date;
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo DIR; ?>tasks?status=wonfix">
                 <div class="panel-footer">
                     <span class="pull-left">Ver</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
@@ -323,7 +324,7 @@ use Helpers\Date;
                     </div>
                 </div>
             </div>
-            <a href="#">
+            <a href="<?php echo DIR; ?>tasks?status=closed">
                 <div class="panel-footer">
                     <span class="pull-left">Ver</span>
                     <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

@@ -71,6 +71,10 @@ use Helpers\Date;
                         <td><?php echo htmlentities($task->user_name); ?></td>
                     </tr>
                     <tr>
+                        <td>Atualizado</td>
+                        <td><?php echo Date::getTempo($task->update_on); ?></td>
+                    </tr>
+                    <tr>
                         <td>Projeto</td>
                         <td><?php echo htmlentities($task->project); ?></td>
                     </tr>

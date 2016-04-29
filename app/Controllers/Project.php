@@ -35,6 +35,9 @@ class Project extends Controller
         $this->userConfig    = new \App\Models\User\userConfig();
         $this->projectConfig = new \App\Models\Project\projectConfig();
         $this->projectTable  = new \App\Models\Project\ProjectTable();
+        $this->groupConfig   = new \App\Models\Group\GroupConfig();
+    }
+
     /**
      * Define Index page title and load template files
      */
@@ -84,6 +87,58 @@ class Project extends Controller
 
         View::renderTemplate('header', $data);
         View::render('Project/List', $data);
+        View::renderTemplate('footer', $data);
+    }
+
+    public function details($project_id) {
+
+        $user_id = Session::get('user_id');
+
+        $data['project'] = $this->projectConfig->getProject($project_id, $user_id);
+
+        if(!$data['project']) {
+             Url::redirect('');
+        }
+
+
+        $data['title']          = 'Detalhes do Projeto: #'.$data['project']->id;
+        $data['return_url']     = 'project/details/'.$data['project']->id;
+
+
+        // Lista de na Equipe
+
+        $data['group'] = $this->groupConfig->getGroups([
+            'project_id' => $project_id,
+          //  'user_id'    => $user_id
+        ]);
+
+        // echo '<pre>';
+        // print_r($data['group']);
+
+        $usersObject = $this->userConfig->getUsers([
+            'project_id' => $project_id,
+            'not_own_id' => true
+        ]);
+
+        // print_r($data['users']);
+        // die();
+        // // Lista de Usuarios
+
+        // $usersObject = $this->userConfig->getUsers();
+
+
+        // $data['users'] = array();
+
+        if(count($usersObject) > 0) {
+            foreach ($usersObject as $user) {
+                $data['users'][$user->user_id] = $user->name;
+            }
+        }
+
+
+        View::renderTemplate('header', $data);
+        View::render('Project/Details', $data);
+        View::render('Models/AddUserGroup', $data);
         View::renderTemplate('footer', $data);
     }
 

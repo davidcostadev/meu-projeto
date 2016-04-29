@@ -28,6 +28,7 @@ Router::any('tasks', 'App\Controllers\Task@index');
 
 Router::any('project/add', 'App\Controllers\Project@add');
 Router::any('project/save', 'App\Controllers\Project@save');
+Router::any('project/details/(:num)', 'App\Controllers\Project@details');
 Router::any('projects', 'App\Controllers\Project@index');
 
 Router::any('group/save', 'App\Controllers\Group@save');

@@ -77,6 +77,29 @@ INSERT INTO `tbl_user` (`id`, `name`, `email`, `password`, `created_on`, `update
 (1, 'Webmaster', 'webmaster@meuprojeto.com.br', '$2y$10$rvVCYEL4BQzFJ8aE.QhID.R6XlTfn6a6rqkKfdBMiqWGklYoa8nhi', '2016-04-11 20:00:00', '2016-04-11 20:00:00'),
 (2, 'Cliente', 'cliente@meuprojeto.com.br', '$2y$10$rvVCYEL4BQzFJ8aE.QhID.R6XlTfn6a6rqkKfdBMiqWGklYoa8nhi', '2016-04-11 20:00:00', '2016-04-11 20:00:00');
 
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tbl_user_rel_project`
+--
+
+CREATE TABLE `tbl_user_rel_project` (
+  `id` int(11) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `permission` set('see','edit','admin') NOT NULL,
+  `block` tinyint(1) NOT NULL DEFAULT '0',
+  `updated_on` datetime NOT NULL,
+  `created_on` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `tbl_user_rel_project`
+--
+
+INSERT INTO `tbl_user_rel_project` (`id`, `project_id`, `user_id`, `permission`, `block`, `updated_on`, `created_on`) VALUES
+(1, 1, 1, 'admin', 0, '2016-04-28 03:03:16', '2016-04-28 03:03:16');
+
 
 --
 -- Indexes for dumped tables
@@ -103,6 +126,12 @@ ALTER TABLE `tbl_user`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tbl_user_rel_project`
+--
+ALTER TABLE `tbl_user_rel_project`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -121,3 +150,8 @@ ALTER TABLE `tbl_task`
 --
 ALTER TABLE `tbl_user`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- AUTO_INCREMENT for table `tbl_user_rel_project`
+--
+ALTER TABLE `tbl_user_rel_project`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;

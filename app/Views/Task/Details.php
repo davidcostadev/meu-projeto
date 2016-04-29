@@ -6,7 +6,7 @@ use Helpers\Date;
 ?><div class="row">
     <div class="col-xs-12 col-md-8">
          <h3><?php echo htmlentities($task->kind); ?>: <?php echo htmlentities($task->task); ?> <small><span class="label label-default"><?php echo htmlentities($task->status); ?></span></small></h3>
-         <p><strong><?php echo htmlentities($task->user_name); ?></strong> Criou uma Tarefa <i><?php echo Date::getTempo($task->update_on); ?></i><br>
+         <p><strong><?php echo htmlentities($task->user_name); ?></strong> Criou uma Tarefa <i><?php echo Date::getTempo($task->updated_on); ?></i><br>
             <?php echo htmlentities($task->description); ?>
          </p>
          <hr>
@@ -64,7 +64,7 @@ use Helpers\Date;
                     </tr>
                     <tr>
                         <td>Criado Em</td>
-                        <td><?php echo Date::getTempo($task->create_on); ?></td>
+                        <td><?php echo Date::getTempo($task->created_on); ?></td>
                     </tr>
                     <tr>
                         <td>Criado Por</td>
@@ -72,7 +72,7 @@ use Helpers\Date;
                     </tr>
                     <tr>
                         <td>Atualizado</td>
-                        <td><?php echo Date::getTempo($task->update_on); ?></td>
+                        <td><?php echo Date::getTempo($task->updated_on); ?></td>
                     </tr>
                     <tr>
                         <td>Projeto</td>

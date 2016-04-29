@@ -51,8 +51,8 @@ CREATE TABLE `tbl_task` (
 -- Extraindo dados da tabela `tbl_task`
 --
 
-INSERT INTO `tbl_task` (`id`, `own_id`, `project_id`, `task`, `description`, `status`, `priority`, `kind`, `create_on`, `updated_on`) VALUES
-(1, 1, 1, 'Essa é uma tarefa', 'Descrição DescriçãoDescriçãoDescrição', 'closed', 'average', 'implementation', '2016-04-12 00:45:59', '2016-04-12 00:45:59');
+INSERT INTO `tbl_task` (`id`, `own_id`, `project_id`, `task`, `description`, `status`, `priority`, `kind`, `created_on`, `updated_on`) VALUES
+(1, 1, 1, 'Essa é uma tarefa', 'Descrição Descrição Descrição Descrição.', 'closed', 'average', 'implementation', '2016-04-12 00:45:59', '2016-04-12 00:45:59');
 
 -- --------------------------------------------------------
 

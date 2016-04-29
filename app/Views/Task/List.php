@@ -103,13 +103,13 @@ use Helpers\Date;
                         <td class="text-center"><a href="<?php echo DIR; ?>tasks?priority=<?php echo $task->priority; ?>" title="Filtrar Por Prioridade"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></a></td>
                         <td><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $task->project_id; ?>" title="Filtrar Por Projeto"><?php echo $task->project_name; ?></a></td>
                         <td><a href="<?php echo DIR; ?>tasks?status=<?php echo $task->status; ?>" title="Filtrar Por Status"><?php echo $task->status; ?></a></td>
-                        <td class="text-right"><?php echo Date::getTempo($task->update_on); ?></td>
+                        <td class="text-right"><?php echo Date::getTempo($task->updated_on); ?></td>
 
                         <td class="text-right">
                             <div class="btn-group">
-                                <button type="button" id="editMusica" class="btn btn-default btn-xs" data-id-musica="<?php echo $task->id_musica; ?>" data-id-musica="<?php echo $task->id_cantor; ?>" data-musica="<?php echo $task->musica; ?>" data-cantor="<?php echo $task->cantor; ?>" data-toggle="modal" data-target="#modalEditMusica">
+                                <a href="<?php echo DIR; ?>task/edit/<?php echo $task->id; ?>" class="btn btn-default btn-xs" title="Editar Detalhes da Tarefa">
                                     <i class="fa fa-pencil-square-o"></i> Editar
-                                </button>
+                                </a>
                                 <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
                                     <span class="caret"></span>
                                 </button>
@@ -127,6 +127,6 @@ use Helpers\Date;
     <div class="panel-footer text-center">
         <?php echo $paginacao; ?>
         <hr>
-        <?php echo '<span style="font-size: 10px"><label class="label label-info">'.$quant.'</label> produtos no total ('.$time. ' Segundos)</span>'; ?>
+        <?php echo '<span style="font-size: 10px"><label class="label label-info">'.$quant.'</label> tarefas no total ('.$time. ' Segundos)</span>'; ?>
     </div>
 </div>

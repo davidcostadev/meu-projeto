@@ -80,7 +80,7 @@ use Helpers\Date;
                                         <td class="text-center"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></td>
                                         <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Tarefa"><?php echo $task->task; ?></a></td>
                                         <td class="text-center"><?php echo $task->status; ?></td>
-                                        <td class="text-right"><?php echo Date::getTempo($task->update_on); ?></td>
+                                        <td class="text-right"><?php echo Date::getTempo($task->updated_on); ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php else: ?>

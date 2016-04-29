@@ -31,7 +31,7 @@ class TaskConfig extends Model
             $data['kind']        = $params['kind'];
         }
 
-        $data['update_on']  = date('Y-m-d G:i:s');
+        $data['updated_on']  = date('Y-m-d G:i:s');
 
 
 
@@ -55,8 +55,8 @@ class TaskConfig extends Model
             'status'      => $params['status'],
             'priority'    => $params['priority'],
             'kind'        => $params['kind'],
-            'create_on'   => $data,
-            'update_on'   => $data,
+            'created_on'   => $data,
+            'updated_on'   => $data,
         );
 
         $result = $this->db->insert('tbl_task', $data_task);
@@ -111,7 +111,7 @@ class TaskConfig extends Model
         AND t.status != 'closed'
 
 
-        ORDER BY t.priority ASC, t.update_on ASC
+        ORDER BY t.priority ASC, t.updated_on ASC
         LIMIT 5
         ";
 

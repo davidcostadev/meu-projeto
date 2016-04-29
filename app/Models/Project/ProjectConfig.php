@@ -26,7 +26,7 @@ class ProjectConfig extends Model
         }
 
 
-        $data['update_on']  = date('Y-m-d G:i:s');
+        $data['updated_on']  = date('Y-m-d G:i:s');
 
 
         $where = array('project_id' => $params['project_id']);
@@ -44,8 +44,8 @@ class ProjectConfig extends Model
             'own_id'      => $params['own_id'],
             'project'     => $params['project'],
             'description' => $params['description'],
-            'create_on'   => $data,
-            'update_on'   => $data,
+            'created_on'   => $data,
+            'updated_on'   => $data,
         );
 
         $result = $this->db->insert('tbl_project', $data_task);

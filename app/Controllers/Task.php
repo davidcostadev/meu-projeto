@@ -73,7 +73,7 @@ class Task extends Controller
         $this->taskTable->setOrderBy([
             't.status',
             't.priority' => 'ASC',
-            't.update_on' => 'DESC'
+            't.updated_on' => 'DESC'
         ]);
         $data['tasks'] = $this->taskTable->getList();
 

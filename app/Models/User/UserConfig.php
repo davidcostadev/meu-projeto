@@ -13,17 +13,19 @@ class UserConfig extends Model
         parent::__construct();
     }  
 
-    public function getUser() {
+    public function getUsers($where = array()) {
+
+        $sql_array = $this->getUsersWhere($where);
 
         $sql = "SELECT 
-        u.id AS user_id,
-        u.name,
-        u.email,
-        u.create
-        FROM tbl_user as u
+        u.*,
+        u.id AS user_id {$sql_array['campos']}
+        FROM tbl_user AS u
+        {$sql_array['inner']}
+        {$sql_array['where']}
         ";
 
-
+        //die($sql);
         $result = $this->db->select($sql);
 
         if(count($result) == 0) {
@@ -60,6 +62,35 @@ class UserConfig extends Model
         return $this->db->select('SELECT 
             email, password
             FROM tbl_users'
+        );
+    }
+
+    private function getUsersWhere($where = array()) {
+
+        $campos_sql = '';
+        $where_sql  = '';
+        $inner_sql  = array();
+
+
+        if(count($where) > 0) {
+            $where_sql .= 'WHERE ';
+        }
+
+        if(isset($where['project_id']) && isset($where['user_id'])) {
+         
+        } elseif(isset($where['project_id']) && isset($where['not_own_id'])) {
+            //$campos_sql .= ', u.*';
+            $inner_sql[] = 'INNER JOIN tbl_project AS p ON p.own_id = u.id';
+            $where_sql  .= 'p.id != ' . $where['project_id'];
+            $where_sql  .= "\n".'GROUP BY u.id';
+        } elseif(isset($where['project_id'])) {
+            
+        }
+
+        return array(
+            'campos' => $campos_sql,
+            'inner'  => implode("\n", $inner_sql),
+            'where'  => $where_sql
         );
     }
 }

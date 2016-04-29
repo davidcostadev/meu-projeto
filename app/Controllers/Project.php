@@ -32,8 +32,8 @@ class Project extends Controller
             Url::redirect('');
         }
 
-        $this->userConfig    = new \App\Models\User\userConfig();
-        $this->projectConfig = new \App\Models\Project\projectConfig();
+        $this->userConfig    = new \App\Models\User\UserConfig();
+        $this->projectConfig = new \App\Models\Project\ProjectConfig();
         $this->projectTable  = new \App\Models\Project\ProjectTable();
         $this->groupConfig   = new \App\Models\Group\GroupConfig();
     }
@@ -150,7 +150,7 @@ class Project extends Controller
         $data['welcomeMessage'] = $this->language->get('subpageMessage');
         $data['return_url']     = 'project/add';
 
-        $usersObject = $this->userConfig->getUser();
+        $usersObject = $this->userConfig->getUsers();
 
 
         $data['users'] = array();

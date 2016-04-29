@@ -29,7 +29,7 @@ class ProjectConfig extends Model
         $data['updated_on']  = date('Y-m-d G:i:s');
 
 
-        $where = array('project_id' => $params['project_id']);
+        $where = array('id' => $params['project_id']);
 
         $this->db->update('tbl_project',$data, $where);
     }
@@ -41,9 +41,9 @@ class ProjectConfig extends Model
         }
 
         $data_task = array(
-            'own_id'      => $params['own_id'],
-            'project'     => $params['project'],
-            'description' => $params['description'],
+            'own_id'       => $params['own_id'],
+            'project'      => $params['project'],
+            'description'  => $params['description'],
             'created_on'   => $data,
             'updated_on'   => $data,
         );

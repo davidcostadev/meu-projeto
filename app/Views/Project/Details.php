@@ -1,10 +1,9 @@
 <?php
 
-//use App\Models\Task\TaskConfig;
 use Helpers\Date;
 
-
-?><div class="row">
+?>
+<div class="row">
     <div class="col-xs-12 col-md-8">
          <h3><?php echo htmlentities($project->project); ?> <small><span class="label label-default"></span></small></h3>
          <p><strong><?php echo htmlentities($project->user_name); ?></strong> Criou o Projeto a <i><?php echo Date::getTempo($project->updated_on); ?></i><br>
@@ -21,7 +20,7 @@ use Helpers\Date;
             </div>
             <div class="col-xs-4 text-right">
                 <div class="btn-group btn-block">
-                    <a href="<?php echo DIR; ?>task/edit/<?php echo $project->task_id; ?>" class="btn btn-default">Editar</a>
+                    <a href="<?php echo DIR; ?>project/edit/<?php echo $project->id; ?>" class="btn btn-default">Editar</a>
                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                          <span class="caret"></span>
                     </button>

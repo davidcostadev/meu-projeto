@@ -142,6 +142,39 @@ class Project extends Controller
         View::renderTemplate('footer', $data);
     }
 
+    public function edit($project_id) {
+
+        $user_id = Session::get('user_id');
+
+        $data['project'] = $this->projectConfig->getProject($project_id, $user_id);
+
+        if(!$data['project']) {
+             Url::redirect('');
+        }
+
+
+        $data['title']         = 'Editar Projeto: #'.$data['project']->id;
+        $data['return_url']    = 'project/edit/'.$data['project']->id;
+
+
+        $usersObject = $this->userConfig->getUsers();
+
+        $data['users'] = array();
+
+        if(count($usersObject) > 0) {
+            foreach ($usersObject as $user) {
+                if($user->id != $data['project']->project_id) {
+                    $data['users'][$user->user_id] = $user->name;
+                }
+
+                
+            }
+        }
+
+
+        View::renderTemplate('header', $data);
+        View::render('Project/Edit', $data);
+        View::renderTemplate('footer', $data);
     }
 
     public function add() {

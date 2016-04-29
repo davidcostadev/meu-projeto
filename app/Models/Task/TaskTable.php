@@ -13,7 +13,6 @@ class TaskTable extends Table
         $this->setFields([
             't.*',
             'p.project'     => 'project_name',
-            //'p.description' => 'project_description',
             'p.own_id'      => 'project_user_id',
             'c.name'        => 'client_name',
             'c.email'       => 'client_email',

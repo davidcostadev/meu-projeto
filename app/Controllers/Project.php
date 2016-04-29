@@ -112,22 +112,14 @@ class Project extends Controller
           //  'user_id'    => $user_id
         ]);
 
-        // echo '<pre>';
-        // print_r($data['group']);
 
         $usersObject = $this->userConfig->getUsers([
             'project_id' => $project_id,
             'not_own_id' => true
         ]);
 
-        // print_r($data['users']);
-        // die();
-        // // Lista de Usuarios
 
-        // $usersObject = $this->userConfig->getUsers();
-
-
-        // $data['users'] = array();
+        $data['users'] = array();
 
         if(count($usersObject) > 0) {
             foreach ($usersObject as $user) {
@@ -214,7 +206,8 @@ class Project extends Controller
         } else {
             $result   = $this->projectConfig->addProject($data);    
         }
-   
+
+
         if(!empty($url)) {
             Url::redirect($url);
         } else {

@@ -38,7 +38,13 @@ class Welcome extends Controller
         $data['title'] = 'Dashboard';
         $data['welcomeMessage'] = $this->language->get('welcomeMessage');
 
-        $data['projects']   = $this->projectConfig->getProjects();
+
+        $where = array(
+            'own_id'  => Session::get('user_id'),
+            'user_id' => Session::get('user_id')
+        );
+
+        $data['projects']   = $this->projectConfig->getProjects($where);
         $data['taskConfig'] = $this->taskConfig;
 
         $data['return_url']    = '';

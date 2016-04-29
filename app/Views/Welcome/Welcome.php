@@ -59,7 +59,7 @@ use Helpers\Date;
 
 
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped">
+                    <table class="table table-hover table-striped">
                         <thead>
                             <tr>
                                 <th style="width: 60px;">#</th>
@@ -92,6 +92,7 @@ use Helpers\Date;
                     </table>
                 </div>
                 <!-- /.table-responsive -->
+                <div class="text-center"><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>" class="btn btn-link btn-block" title="Ver Mais">Ver mais</a></div>
             </div>
             <!-- /.panel-body -->
         </div>

@@ -48,9 +48,7 @@ class ProjectConfig extends Model
             'updated_on'   => $data,
         );
 
-        $result = $this->db->insert('tbl_project', $data_task);
-
-        return true;
+        return $this->db->insert('tbl_project', $data_task);
     }
 
     public function getProject($project_id, $user_id = 0) {

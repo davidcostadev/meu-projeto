@@ -41,9 +41,6 @@ class GroupConfig extends Model
             return 1;
         }
 
-        if($this->getGroup($param['project_id'], $param['user_id']) != false) {
-            return 1;
-        }
 
         if(empty($data)) {
             $data = date('Y-m-d G:i:s');

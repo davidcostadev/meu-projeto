@@ -4,7 +4,7 @@ use Helpers\Date;
 use Helpers\Form;
 
 echo Form::open([
-    'action' => DIR . 'project/save?return='.urlencode($return_url),
+    'action' => DIR . 'project/save',
     'method' => 'post',
     'id'     => 'form-edit-project',
     'class'  => 'form-horizontal'

@@ -172,11 +172,8 @@ class Project extends Controller
     public function add() {
 
         $data['title']          = 'Adicionar Projeto';
-        $data['welcomeMessage'] = $this->language->get('subpageMessage');
-        $data['return_url']     = 'project/add';
 
         $usersObject = $this->userConfig->getUsers();
-
 
         $data['users'] = array();
 
@@ -204,14 +201,24 @@ class Project extends Controller
         if($data['project_id'] > 0) {
             $result   = $this->projectConfig->updateProject($data);    
         } else {
-            $result   = $this->projectConfig->addProject($data);    
+
+            $project_id = $this->projectConfig->addProject($data);  
+
+            $data = array(
+                'project_id' => $project_id,
+                'user_id'    => Session::get('user_id'),
+                'permission' => 'admin'
+            );  
+
+            $this->groupConfig->addGroup($data);
         }
 
 
         if(!empty($url)) {
             Url::redirect($url);
         } else {
-            Url::redirect('');
+            Url::redirect('project/details/' . $project_id);
+            
         }
     }
     

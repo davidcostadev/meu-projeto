@@ -109,15 +109,13 @@ INSERT INTO `tbl_user_rel_project` (`id`, `project_id`, `user_id`, `permission`,
 -- Indexes for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  ADD PRIMARY KEY (`id`,`own_id`),
-  ADD KEY `own_id` (`own_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_task`
 --
 ALTER TABLE `tbl_task`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `tbl_user`
@@ -139,17 +137,17 @@ ALTER TABLE `tbl_user_rel_project`
 -- AUTO_INCREMENT for table `tbl_project`
 --
 ALTER TABLE `tbl_project`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_task`
 --
 ALTER TABLE `tbl_task`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tbl_user`
 --
 ALTER TABLE `tbl_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `tbl_user_rel_project`
 --

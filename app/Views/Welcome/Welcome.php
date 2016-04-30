@@ -12,7 +12,7 @@ use Helpers\Date;
         <?php
             $tasks = $taskConfig->getTasks(array('project_id' => $project->project_id));
 
-            $count =  TaskConfig::getQuantTasks(array('project_id' => $project->project_id)); 
+            $count =  TaskConfig::getQuantTasks(array('project_id' => $project->project_id), array('AND' => array('!resolved', '!closed'))); 
 
             if($count == 0) {
                 continue;

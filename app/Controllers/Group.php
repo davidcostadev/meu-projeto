@@ -42,7 +42,7 @@ class Group extends Controller
         $data['permission']  = input::post('permission');
         $url                 = input::get('return', null, FILTER_SANITIZE_URL);
 
-        $result   = $this->groupConfig->addGroup($data);    
+        $result   = $this->groupConfig->addGroup($data);
    
         if(!empty($url)) {
             Url::redirect($url);

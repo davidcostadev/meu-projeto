@@ -116,13 +116,10 @@ class TaskConfig extends Model
         ";
 
         $result = $this->db->select($sql, array(':project_id' => $params['project_id']));
-        //$result = $this->db->select($sql, array(':email' => $params['email']));
 
         if(count($result) == 0) {
             return array();
         }
-
-
 
         return $result;
     }
@@ -133,172 +130,73 @@ class TaskConfig extends Model
         FROM tbl_task AS t";
 
         if(count($params) > 0) {
-            $sql .= "  WHERE 
-            t.project_id = :project_id ";
+            $sql .= "\n  WHERE 
+            t.project_id = :project_id \n";
         }
 
         if(count($params) == 0 && (!empty($status) || !empty($priority)|| !empty($kind))) {
-            $sql .= ' WHERE 1=1 ';
+            $sql .= "\n WHERE 1 = 1 ";
         }
         
+        // status ----
 
         if(is_string($status)) {
             $status = array($status);
         }
 
-        $sql_array = array();
-        foreach ($status as $status_str) {
-            switch ($status_str) {
-                case 'new' :
-                    $sql_array[] = 't.status = \'new\' ';
-                    break;
-                case '!new' :
-                    $sql_array[] = 't.status != \'new\' ';
-                    break;
-                case 'open' :
-                    $sql_array[] = 't.status = \'open\' ';
-                    break;
-                case '!open' :
-                    $sql_array[] = 't.status != \'open\' ';
-                    break;
-                case 'onhold' :
-                    $sql_array[] = 't.status = \'onhold\' ';
-                    break;
-                case '!onhold' :
-                    $sql_array[] = 't.status != \'onhold\' ';
-                    break;
-                case 'resolved' :
-                    $sql_array[] = 't.status = \'resolved\' ';
-                    break;
-                case '!resolved' :
-                    $sql_array[] = 't.status != \'resolved\' ';
-                    break;
-                case 'invalid' :
-                    $sql_array[] = 't.status = \'invalid\' ';
-                    break;
-                case '!invalid' :
-                    $sql_array[] = 't.status != \'invalid\' ';
-                    break;
-                case 'wontfix' :
-                    $sql_array[] = 't.status = \'wontfix\' ';
-                    break;
-                case '!wontfix' :
-                    $sql_array[] = 't.status != \'wontfix\' ';
-                    break;
-                case 'closed' :
-                    $sql_array[] = 't.status = \'closed\' ';
-                    break;
-                case '!closed' :
-                    $sql_array[] = 't.status != \'closed\' ';
-                    break;
-                default:
-                    break;
-            }
-        }
+        $statusList = [
+            'new',
+            'open',
+            'onhold',
+            'resolved',
+            'invalid',
+            'wontfix',
+            'closed'
+        ];
 
-        if(count($status)) {
-            $sql .= ' AND (';
-        }
+        if(count($status)) $sql .= ' AND (';
 
-        $sql .= implode(' OR ', $sql_array);
+        $sql .= $this->setWhereVar($status, 't.status', $statusList);
 
-        if(count($status)) {
-            $sql .= ') ';
-        }
+        if(count($status)) $sql .= ') ';
+
+
+        // priority ----
+
+        if(is_string($priority)) $priority = array($priority);
+        
+        $priorityList = [
+            'high',
+            'average',
+            'low'
+        ];
+
+        if(count($priority)) $sql .= ' AND (';
+
+        $sql .= $this->setWhereVar($priority, 't.t.priority', $priorityList);
+
+        if(count($priority)) $sql .= ') ';
 
 
 
-        if(is_string($priority)) {
-            $priority = array($priority);
-        }
+        // kind ----
 
-        $sql_array = array();
-        foreach ($priority as $priority_str) {
-            switch ($priority_str) {
-                case 'high' :
-                    $sql_array[] = 't.priority = \'high\' ';
-                    break;
-                case '!high' :
-                    $sql_array[] = 't.priority != \'high\' ';
-                    break;
-                case 'average' :
-                    $sql_array[] = 't.priority = \'average\' ';
-                    break;
-                case '!average' :
-                    $sql_array[] = 't.priority != \'average\' ';
-                    break;
-                case 'low' :
-                    $sql_array[] = 't.priority = \'low\' ';
-                    break;
-                case '!low' :
-                    $sql_array[] = 't.priority != \'low\' ';
-                    break;
-                default:
-                    break;
-            }
-        }
+        if(is_string($kind)) $kind = array($kind);
 
-        if(count($priority)) {
-            $sql .= ' AND (';
-        }
+        $kindList = [
+            'bug',
+            'implementation',
+            'change',
+            'task',
+            'proposal'
+        ];
 
-        $sql .= implode(' OR ', $sql_array);
+        if(count($kind)) $sql .= ' AND (';
 
-        if(count($priority)) {
-            $sql .= ') ';
-        }
+        $sql .= $this->setWhereVar($kind, 't.kind', $kindList);
 
-        if(is_string($kind)) {
-            $kind = array($kind);
-        }
+        if(count($kind)) $sql .= ') ';
 
-        $sql_array = array();
-        foreach ($kind as $kind_str) {
-            switch ($kind_str) {
-                case 'bug' :
-                    $sql_array[] = 't.kind = \'bug\' ';
-                    break;
-                case '!bug' :
-                    $sql_array[] = 't.kind != \'bug\' ';
-                    break;
-                case 'implementation' :
-                    $sql_array[] = 't.kind = \'implementation\' ';
-                    break;
-                case '!implementation' :
-                    $sql_array[] = 't.kind != \'implementation\' ';
-                    break;
-                case 'change' :
-                    $sql_array[] = 't.kind = \'change\' ';
-                    break;
-                case '!change' :
-                    $sql_array[] = 't.kind != \'change\' ';
-                    break;
-                case 'task' :
-                    $sql_array[] = 't.kind = \'task\' ';
-                    break;
-                case '!task' :
-                    $sql_array[] = 't.kind != \'task\' ';
-                    break;
-                case 'proposal' :
-                    $sql_array[] = 't.kind = \'proposal\' ';
-                    break;
-                case '!proposal' :
-                    $sql_array[] = 't.kind != \'proposal\' ';
-                    break;
-                default:
-                    break;
-            }
-        }
-
-        if(count($kind)) {
-            $sql .= ' AND (';
-        }
-
-        $sql .= implode(' OR ', $sql_array);
-
-        if(count($kind)) {
-            $sql .= ') ';
-        }
 
         $result = $this->db->select($sql, array(':project_id' => $params['project_id']));
 
@@ -360,4 +258,48 @@ class TaskConfig extends Model
         return $return;
     }
 
+    private function verificarWhereVar($vars, $field, $var_list, $glue = 'OR') {
+
+        $sql = '';
+
+        foreach ($vars as $key => $var) {
+            if(is_string($key)) {
+                if(strtolower($key) == 'and') {
+                    $sql .= $this->setWhereVar($var, $field, $var_list, $key);
+                } else {
+                    $sql .= $this->setWhereVar($var, $field, $var_list);
+                }
+            } else {
+                $sql .= $this->setWhereVar($var, $field, $var_list);
+            }
+        }
+
+        return $sql;
+    }
+
+    private function setWhereVar($vars, $field, $var_list, $glue = 'OR') {
+
+        $sql_array = array();
+
+        foreach ($vars as $key => $var) {
+            if(is_string($key)) {
+                $sql_array[] = $this->verificarWhereVar($vars, $field, $var_list, $key);
+            }
+            for ($i=0; $i < count($var_list); $i++) { 
+                if($var_list[$i] == $var || '!'.$var_list[$i] == $var) {
+                    if('!'.$var_list[$i] == $var) {
+                        $var = str_replace('!', '', $var);
+                        $sql_array[] = "$field != '$var' ";
+                    } else {
+                        $sql_array[] = "$field = '$var' ";   
+                    }
+                }
+            }
+            if($var) {
+
+            }
+        }
+
+        return implode(' '.$glue.' ', $sql_array);
+    }
 }

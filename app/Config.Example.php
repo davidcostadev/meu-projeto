@@ -106,7 +106,7 @@ class Config
         /**
          * Optional set a site email address.
          */
-        define('SITEEMAIL', 'contato@davidcosta.com.br');
+        define('SITEEMAIL', 'seu@email.com.br');
 
         /**
          * Turn on custom error handling.

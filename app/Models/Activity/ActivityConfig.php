@@ -16,8 +16,8 @@ class ProjectConfig extends Model
         $sql = "SELECT 
         p.id as project_id,
         p.project,
-        p.description as project_description,
-        p.own_id as project_own_id,
+        p.description as description,
+        p.own_id as own_id,
         u.name as user_name,
         u.email as user_email
         FROM tbl_project AS p

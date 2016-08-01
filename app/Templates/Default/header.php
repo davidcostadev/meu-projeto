@@ -326,7 +326,7 @@
                                 </ul>
                             </li>
                             <li>
-                                <a href="#" class="" title="Equipe"><i class="fa fa-users"></i> <span class="nome">Equipe</span></a>
+                                <a href="#" class="" title="Usuários"><i class="fa fa-users"></i> <span class="nome">Usuários</span></a>
                             </li>
                             <li>
                                 <a href="#" class="" title="Senhas"><i class="fa fa-key"></i> <span class="nome">Senhas</span></a>

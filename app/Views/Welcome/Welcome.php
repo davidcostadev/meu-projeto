@@ -8,95 +8,102 @@ use Helpers\Date;
 ?>
 <div class="row">
     <div class="col-lg-8">
-    <?php foreach($projects as $project) : ?>
-        <?php
-            $tasks = $taskConfig->getTasks(array('project_id' => $project->project_id));
-
-            $count =  TaskConfig::getQuantTasks(array('project_id' => $project->project_id), array('AND' => array('!resolved', '!closed'))); 
-
-            if($count == 0) {
-                continue;
-            }
-        ?>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <i class="fa fa-area-chart fa-fw"></i> <a href="<?php echo DIR; ?>tasks?client_id=<?php echo $project->own_id; ?>"><?php echo $project->user_name;?></a> / <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>"><?php echo $project->project; ?></a>
-                <div class="pull-right"><button class="btn btn-xs btn-default" id="addTask" data-toggle="modal" data-target="#modalAddTask" data-project-id="<?php echo $project->project_id; ?>"><i class="fa fa-plus"></i> Tarefa</button></div>
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                
-                <p><small><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id)); ?> Tarefas</a>
-                (<a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=new'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'new'); ?> Novos</a> -
-                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=resolved'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'resolved'); ?> Resolvidos</a> -
-                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=open'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'open'); ?> Abertas</a> -
-                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=closed'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'closed'); ?> Fechadas</a> -
-                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=onhold'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'onhold'); ?> Em espera</a> -
-                <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=wontfix'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'wontfix'); ?> Não resolvidas</a>
-                )</small></p>
-    
+        <?php if(count($projects)) : ?>
+            <?php foreach($projects as $project) : ?>
                 <?php
-                if(count($tasks)) {
+                    $tasks = $taskConfig->getTasks(array('project_id' => $project->project_id));
 
+                    $count =  TaskConfig::getQuantTasks(array('project_id' => $project->project_id), array('AND' => array('!resolved', '!closed'))); 
 
-                    $total       = TaskConfig::getQuantTasks(array('project_id' => $project->project_id));
-                    $completadas = TaskConfig::getQuantTasks(array('project_id' => $project->project_id), array('resolved', 'closed'));
-
-                    //echo '('.$completadas.'  * 100) / '.$total.'<br>';
-
-                    $porcentagem = ($completadas * 100) / $total;
-                } else {
-                    $porcentagem = 0;
-                }
-
+                    if($count == 0) {
+                        continue;
+                    }
                 ?>
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success" style="width: <?php echo $porcentagem; ?>%">
-                         <span><?php echo round($porcentagem, 0); ?>% Completado</span>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <i class="fa fa-area-chart fa-fw"></i> <a href="<?php echo DIR; ?>tasks?client_id=<?php echo $project->own_id; ?>"><?php echo $project->user_name;?></a> / <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>"><?php echo $project->project; ?></a>
+                        <div class="pull-right"><button class="btn btn-xs btn-default" id="addTask" data-toggle="modal" data-target="#modalAddTask" data-project-id="<?php echo $project->project_id; ?>"><i class="fa fa-plus"></i> Tarefa</button></div>
                     </div>
-                </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        
+                        <p><small><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id)); ?> Tarefas</a>
+                        (<a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=new'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'new'); ?> Novos</a> -
+                        <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=resolved'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'resolved'); ?> Resolvidos</a> -
+                        <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=open'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'open'); ?> Abertas</a> -
+                        <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=closed'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'closed'); ?> Fechadas</a> -
+                        <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=onhold'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'onhold'); ?> Em espera</a> -
+                        <a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id.'&amp;status=wontfix'; ?>"><?php echo TaskConfig::getQuantTasks(array('project_id' => $project->project_id), 'wontfix'); ?> Não resolvidas</a>
+                        )</small></p>
+            
+                        <?php
+                        if(count($tasks)) {
 
 
-                <div class="table-responsive">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <tr>
-                                <th style="width: 60px;">#</th>
-                                <th class="text-center" style="width: 45px;"><span title="Tipo">T</span></th>
-                                <th class="text-center" style="width: 45px;"><span title="Prioridade">P</span></th>
-                                <th>Tarefa</th>
-                                <th class="text-center" style="width: 100px;">Status</th>
-                                <th class="text-right" style="width: 140px;">Atualizado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                            <?php if(count($tasks)): ?>
-                                <?php foreach($tasks as $task): ?>
+                            $total       = TaskConfig::getQuantTasks(array('project_id' => $project->project_id));
+                            $completadas = TaskConfig::getQuantTasks(array('project_id' => $project->project_id), array('resolved', 'closed'));
+
+                            //echo '('.$completadas.'  * 100) / '.$total.'<br>';
+
+                            $porcentagem = ($completadas * 100) / $total;
+                        } else {
+                            $porcentagem = 0;
+                        }
+
+                        ?>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success" style="width: <?php echo $porcentagem; ?>%">
+                                 <span><?php echo round($porcentagem, 0); ?>% Completado</span>
+                            </div>
+                        </div>
+
+
+                        <div class="table-responsive">
+                            <table class="table table-hover table-striped">
+                                <thead>
                                     <tr>
-                                        <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Tarefa"><?php echo $task->id; ?></a></td>
-                                        <td class="text-center"><i class="<?php echo TaskConfig::getIconKind($task->kind); ?>"></i></td>
-                                        <td class="text-center"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></td>
-                                        <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Tarefa"><?php echo $task->task; ?></a></td>
-                                        <td class="text-center"><?php echo $task->status; ?></td>
-                                        <td class="text-right"><?php echo Date::getTempo($task->updated_on); ?></td>
+                                        <th style="width: 60px;">#</th>
+                                        <th class="text-center" style="width: 45px;"><span title="Tipo">T</span></th>
+                                        <th class="text-center" style="width: 45px;"><span title="Prioridade">P</span></th>
+                                        <th>Tarefa</th>
+                                        <th class="text-center" style="width: 100px;">Status</th>
+                                        <th class="text-right" style="width: 140px;">Atualizado</th>
                                     </tr>
-                                <?php endforeach; ?>
-                            <?php else: ?>
-                                    <tr>
-                                        <td class="text-center" colspan="6">nenhuma tafera para esse projeto</td>
-                                    </tr>
-                            <?php endif; ?>
-                        </tbody>
-                    </table>
+                                </thead>
+                                <tbody>
+                                    
+                                    <?php if(count($tasks)): ?>
+                                        <?php foreach($tasks as $task): ?>
+                                            <tr>
+                                                <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Tarefa"><?php echo $task->id; ?></a></td>
+                                                <td class="text-center"><i class="<?php echo TaskConfig::getIconKind($task->kind); ?>"></i></td>
+                                                <td class="text-center"><i class="<?php echo TaskConfig::getIconPriority($task->priority); ?>"></i></td>
+                                                <td><a href="<?php echo DIR; ?>task/details/<?php echo $task->id; ?>" title="Ver Tarefa"><?php echo $task->task; ?></a></td>
+                                                <td class="text-center"><?php echo $task->status; ?></td>
+                                                <td class="text-right"><?php echo Date::getTempo($task->updated_on); ?></td>
+                                            </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                            <tr>
+                                                <td class="text-center" colspan="6">nenhuma tafera para esse projeto</td>
+                                            </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <div class="text-center"><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>" class="btn btn-link btn-block" title="Ver Mais">Ver mais</a></div>
+                    </div>
+                    <!-- /.panel-body -->
                 </div>
-                <!-- /.table-responsive -->
-                <div class="text-center"><a href="<?php echo DIR; ?>tasks?project_id=<?php echo $project->project_id; ?>" class="btn btn-link btn-block" title="Ver Mais">Ver mais</a></div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <div class="alert alert-info">Nenhum projeto para mostrar<br>
+            <p class="text-center"><a href="" class="btn btn-success btn-lg"><i class="fa fa-plus"></i> Adicionar Projeto</a></p>
             </div>
-            <!-- /.panel-body -->
-        </div>
-    <?php endforeach; ?>
+        <?php endif; ?>
+    <?php /*
         <!-- /.panel -->
         <div class="panel panel-default">
             <div class="panel-heading">
@@ -210,6 +217,7 @@ use Helpers\Date;
             <!-- /.panel-body -->
         </div>
         <!-- /.panel -->
+        */ ?>
     </div>
     <!-- /.col-lg-8 -->
     <div class="col-lg-4">

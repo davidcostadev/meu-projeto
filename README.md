@@ -4,11 +4,11 @@ Sistema feito em MVC com o Nova Framework, com proposito de ajudar qualquer dese
 
 ## Instalação
 
- 
-
- 1. Renomei o arquivo que está em **app** de **Config.Exemple.php** para **Config.php**;
- 2. Altere as configurações deste arquivo **Config.php**;
- 3. Instale o Banco de dados que estão no diretório **db/database.sql**;
+ 1. Instale o composer caso não tenha instalado
+ 2. php composer.phar install
+ 3. Renomei o arquivo que está em **app** de **Config.Exemple.php** para **Config.php**;
+ 4. Altere as configurações deste arquivo **Config.php**;
+ 5. Instale o Banco de dados que estão no diretório **db/database.sql**;
 
 
 O usuário padrão é:

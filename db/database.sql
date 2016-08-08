@@ -40,7 +40,7 @@ CREATE TABLE `tbl_task` (
   `project_id` int(11) NOT NULL,
   `task` varchar(150) NOT NULL,
   `description` text NOT NULL,
-  `status` set('new','open','onhold','wontfix','invalid','closed','resolved') NOT NULL,
+  `status` set('open','new','onhold','wontfix','invalid','closed','resolved') NOT NULL,
   `priority` set('high','average','low') NOT NULL,
   `kind` set('bug','implementation','change','task','proposal') NOT NULL,
   `created_on` datetime NOT NULL,

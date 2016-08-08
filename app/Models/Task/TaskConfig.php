@@ -111,7 +111,7 @@ class TaskConfig extends Model
         AND t.status != 'closed'
 
 
-        ORDER BY t.priority ASC, t.updated_on ASC
+        ORDER BY t.priority ASC, t.status ASC, t.updated_on ASC
         LIMIT 5
         ";
 
